@@ -36,15 +36,15 @@ namespace WPF_application_for_registration_and_authorization
 
             CaptchaText.Text = _currentCaptcha;
 
+            var canvas = new Canvas();
+            var visualBrush = new VisualBrush(CaptchaText) { Opacity = 0.1 };
+            canvas.Background = visualBrush;
+
             // Добавляем визуальные помехи
             CaptchaText.Foreground = new SolidColorBrush(
                 Color.FromRgb((byte)random.Next(100, 200),
                              (byte)random.Next(100, 200),
                              (byte)random.Next(100, 200)));
-
-            var canvas = new Canvas();
-            var visualBrush = new VisualBrush(CaptchaText) { Opacity = 0.1 };
-            canvas.Background = visualBrush;
         }
 
         public bool Checked_Method()
@@ -53,7 +53,7 @@ namespace WPF_application_for_registration_and_authorization
             return f;
         }
 
-        private void CheckCaptcha_Click(object sender, RoutedEventArgs e)
+        public void Capcha(string txt)
         {
             if (UserInput.Text.Equals(_currentCaptcha, StringComparison.OrdinalIgnoreCase))
             {
@@ -71,6 +71,11 @@ namespace WPF_application_for_registration_and_authorization
                 GenerateNewCaptcha(); // Обновляем капчу
             }
             UserInput.Clear();
+        }
+
+        private void CheckCaptcha_Click(object sender, RoutedEventArgs e)
+        {
+            Capcha(UserInput.Text);
         }
     }
 }
