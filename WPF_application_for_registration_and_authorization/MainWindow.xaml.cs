@@ -26,31 +26,38 @@ namespace WPF_application_for_registration_and_authorization
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public bool Auth(string login, string password)
         {
-            if (string.IsNullOrEmpty(TextBoxLogin.Text) || string.IsNullOrEmpty(PasswordBoxPassword.Password))
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Введите логин и пароль!");
-                return;
+                return false;
             }
 
             using (var db = new UsersEntities2())
             {
                 var user = db.User
                     .AsNoTracking()
-                    .FirstOrDefault(u => u.Login == TextBoxLogin.Text && u.Password == PasswordBoxPassword.Password);
+                    .FirstOrDefault(u => u.Login == login && u.Password == password);
 
                 if (user == null)
                 {
                     MessageBox.Show("Пользователь с такими данными не найден!");
-                    return;
+                    return false;
                 }
                 else
                 {
                     MessageBox.Show($"С возвращением, {user.Role}, {user.FIO.Split()[1]}!");
-                    return;
+                    TextBoxLogin.Clear();
+                    PasswordBoxPassword.Clear();
+                    return true;
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Auth(TextBoxLogin.Text, PasswordBoxPassword.Password);
         }
 
         private void ButtonRegister_OnClick(object sender, RoutedEventArgs e)
