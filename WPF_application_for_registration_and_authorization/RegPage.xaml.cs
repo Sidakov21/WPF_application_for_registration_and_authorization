@@ -24,40 +24,40 @@ namespace WPF_application_for_registration_and_authorization
             InitializeComponent();
         }
 
-        private void ButtonRegister_OnClick(object sender, RoutedEventArgs e)
+        public bool Registration(string fio, string login, string password, string gender, string role, string phone, string photoURL)
         {
             // Проверка на заполненность всех полей
-            if (string.IsNullOrEmpty(TextBoxFIO.Text) ||
-                string.IsNullOrEmpty(TextBoxLogin.Text) ||
-                string.IsNullOrEmpty(PasswordBox.Password) ||
-                ComboBoxGender.SelectedItem == null ||
-                ComboBoxRole.SelectedItem == null ||
-                string.IsNullOrEmpty(TextBoxPhone.Text) ||
-                string.IsNullOrEmpty(TextBoxPhoto.Text))
+            if (string.IsNullOrEmpty(fio) ||
+                string.IsNullOrEmpty(login) ||
+                string.IsNullOrEmpty(password) ||
+                string.IsNullOrEmpty(gender) ||
+                string.IsNullOrEmpty(role) ||
+                string.IsNullOrEmpty(phone) ||
+                string.IsNullOrEmpty(photoURL))
             {
                 MessageBox.Show("Заполните все поля!");
-                return;
+                return false;
             }
 
             using (var db = new UsersEntities2())
             {
 
-                var existingUser = db.User.FirstOrDefault(u => u.Login == TextBoxLogin.Text);
+                var existingUser = db.User.FirstOrDefault(u => u.Login == login);
                 if (existingUser != null)
                 {
                     MessageBox.Show("Логин уже существует! Выберите другой.");
-                    return;
+                    return false;
                 }
 
                 var newUser = new User
                 {
-                    FIO = TextBoxFIO.Text,
-                    Login = TextBoxLogin.Text,
-                    Password = PasswordBox.Password,
-                    Gender = ComboBoxGender.Text,
-                    Role = ComboBoxRole.Text,
-                    Phone = TextBoxPhone.Text,
-                    Photo = TextBoxPhoto.Text
+                    FIO = fio,
+                    Login = login,
+                    Password = password,
+                    Gender = gender,
+                    Role = role,
+                    Phone = phone,
+                    Photo = photoURL
                 };
 
                 db.User.Add(newUser);
@@ -70,6 +70,13 @@ namespace WPF_application_for_registration_and_authorization
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+
+            return true;
+        }
+
+        private void ButtonRegister_OnClick(object sender, RoutedEventArgs e)
+        {
+            Registration(TextBoxFIO.Text, TextBoxLogin.Text, PasswordBox.Password, ComboBoxGender.SelectedItem.ToString(), ComboBoxRole.SelectedItem.ToString(), TextBoxPhone.Text, TextBoxPhoto.Text);
 
         }
 
