@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:WPF_application_for_registration_and_authorization"
         mc:Ignorable="d"
         Title="MainWindow" Height="200" Width="400">
-    <!--<Frame x:Name="MainFrame" Source="AuthPage.xaml"/>-->
 
     <Grid Background="#C0D9C9">
         <Grid.ColumnDefinitions>

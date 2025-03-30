@@ -13,10 +13,10 @@ namespace WPF_application_for_registration_and_authorization
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UsersEntities : DbContext
+    public partial class UsersEntities2 : DbContext
     {
-        public UsersEntities()
-            : base("name=UsersEntities")
+        public UsersEntities2()
+            : base("name=UsersEntities2")
         {
         }
     

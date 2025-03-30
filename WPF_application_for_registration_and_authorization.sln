@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_application_for_registration_and_authorization", "WPF_application_for_registration_and_authorization\WPF_application_for_registration_and_authorization.csproj", "{7871F9AB-F801-482B-BF92-42F1AB7FDCAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{2885E582-B3E0-4EB1-8417-069D66738577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7871F9AB-F801-482B-BF92-42F1AB7FDCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7871F9AB-F801-482B-BF92-42F1AB7FDCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7871F9AB-F801-482B-BF92-42F1AB7FDCAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2885E582-B3E0-4EB1-8417-069D66738577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2885E582-B3E0-4EB1-8417-069D66738577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2885E582-B3E0-4EB1-8417-069D66738577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2885E582-B3E0-4EB1-8417-069D66738577}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

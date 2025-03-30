@@ -34,7 +34,7 @@ namespace WPF_application_for_registration_and_authorization
                 return;
             }
 
-            using (var db = new UsersEntities())
+            using (var db = new UsersEntities2())
             {
                 var user = db.User
                     .AsNoTracking()
@@ -51,6 +51,13 @@ namespace WPF_application_for_registration_and_authorization
                     return;
                 }
             }
+        }
+
+        private void ButtonRegister_OnClick(object sender, RoutedEventArgs e)
+        {
+            RegPage regPage = new RegPage();
+            regPage.Show();
+            this.Close();
         }
     }
 }

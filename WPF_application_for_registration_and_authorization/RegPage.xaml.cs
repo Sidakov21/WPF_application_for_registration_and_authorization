@@ -26,12 +26,70 @@ namespace WPF_application_for_registration_and_authorization
 
         private void ButtonRegister_OnClick(object sender, RoutedEventArgs e)
         {
+            // Проверка на заполненность всех полей
+            if (string.IsNullOrEmpty(TextBoxFIO.Text) ||
+                string.IsNullOrEmpty(TextBoxLogin.Text) ||
+                string.IsNullOrEmpty(PasswordBox.Password) ||
+                ComboBoxGender.SelectedItem == null ||
+                ComboBoxRole.SelectedItem == null ||
+                string.IsNullOrEmpty(TextBoxPhone.Text) ||
+                string.IsNullOrEmpty(TextBoxPhoto.Text))
+            {
+                MessageBox.Show("Заполните все поля!");
+                return;
+            }
+
+            using (var db = new UsersEntities2())
+            {
+
+                var existingUser = db.User.FirstOrDefault(u => u.Login == TextBoxLogin.Text);
+                if (existingUser != null)
+                {
+                    MessageBox.Show("Логин уже существует! Выберите другой.");
+                    return;
+                }
+
+                var newUser = new User
+                {
+                    FIO = TextBoxFIO.Text,
+                    Login = TextBoxLogin.Text,
+                    Password = PasswordBox.Password,
+                    Gender = ComboBoxGender.Text,
+                    Role = ComboBoxRole.Text,
+                    Phone = TextBoxPhone.Text,
+                    Photo = TextBoxPhoto.Text
+                };
+
+                db.User.Add(newUser);
+                db.SaveChanges();
+            }
+
+            MessageBox.Show("Регистрация успешно завершена!");
+            this.Close();
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
 
         }
 
         private void ButtonCancel_OnClick(object sender, RoutedEventArgs e)
         {
+            // Очищаем все поля формы
+            TextBoxFIO.Text = "";
+            TextBoxLogin.Text = "";
+            PasswordBox.Password = "";
+            ComboBoxGender.SelectedIndex = -1;
+            ComboBoxRole.SelectedIndex = -1;
+            TextBoxPhone.Text = "";
+            TextBoxPhoto.Text = "";
 
+            // Открываем страницу авторизации
+            MainWindow loginWindow = new MainWindow();
+            loginWindow.Show();
+
+            // Закрываем текущую страницу
+            this.Close();
         }
     }
 }
