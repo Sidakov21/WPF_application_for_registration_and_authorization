@@ -21,6 +21,8 @@ namespace WPF_application_for_registration_and_authorization
     /// </summary>
     public partial class MainWindow : Window
     {
+        public int countAttempts = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +44,25 @@ namespace WPF_application_for_registration_and_authorization
 
                 if (user == null)
                 {
+                    countAttempts++;
+                    if (countAttempts > 3)
+                    {
+                        MessageBox.Show("Превышено количество неудачных попыток.\n Пройдите капчу");
+                        Enter_button.IsEnabled = false;
+
+                        CapchaWindow capcha = new CapchaWindow();
+                        bool? captchaResult = capcha.ShowDialog();
+
+                        // Проверяем результат диалога
+                        if (captchaResult == true)
+                        {
+                            Enter_button.IsEnabled = true;
+                            countAttempts = 0;
+                        }
+                        return false;
+                    }
                     MessageBox.Show("Пользователь с такими данными не найден!");
+
                     return false;
                 }
                 else

@@ -1,0 +1,48 @@
+﻿<Window x:Class="WPF_application_for_registration_and_authorization.CapchaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_application_for_registration_and_authorization"
+        mc:Ignorable="d"
+        Title="CapchaWindow" Height="250" Width="400">
+    <Grid Margin="10">
+        <StackPanel>
+            <!-- Блок с капчей -->
+            <Border BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0,0,0,10">
+                <TextBlock x:Name="CaptchaText" 
+                           FontSize="24" 
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="-5"/>
+                            <!-- Наклон текста -->
+                            <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                            <!-- Растяжение -->
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Border>
+
+            <!-- Поле ввода -->
+            <TextBox x:Name="UserInput" 
+                     Margin="0,0,0,10" 
+                     FontSize="16"
+                     HorizontalAlignment="Stretch"/>
+
+            <!-- Кнопка проверки -->
+            <Button Content="Проверить" 
+                    Click="CheckCaptcha_Click"
+                    HorizontalAlignment="Center"
+                    Padding="10,5"/>
+
+            <!-- Сообщение о результате -->
+            <TextBlock x:Name="ResultText" 
+                       Margin="0,10,0,0"
+                       HorizontalAlignment="Center"
+                       FontSize="14"/>
+        </StackPanel>
+    </Grid>
+</Window>
