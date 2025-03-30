@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,33 @@ namespace WPF_application_for_registration_and_authorization
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new AuthPage());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TextBoxLogin.Text) || string.IsNullOrEmpty(PasswordBoxPassword.Password))
+            {
+                MessageBox.Show("Введите логин и пароль!");
+                return;
+            }
+
+            using (var db = new UsersEntities())
+            {
+                var user = db.User
+                    .AsNoTracking()
+                    .FirstOrDefault(u => u.Login == TextBoxLogin.Text && u.Password == PasswordBoxPassword.Password);
+
+                if (user == null)
+                {
+                    MessageBox.Show("Пользователь с такими данными не найден!");
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show($"С возвращением, {user.Role}, {user.FIO.Split()[1]}!");
+                    return;
+                }
+            }
         }
     }
 }

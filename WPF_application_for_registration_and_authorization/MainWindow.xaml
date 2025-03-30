@@ -5,6 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_application_for_registration_and_authorization"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Frame x:Name="MainFrame" Source="AuthPage.xaml"/>
+        Title="MainWindow" Height="200" Width="400">
+    <!--<Frame x:Name="MainFrame" Source="AuthPage.xaml"/>-->
+
+    <Grid Background="#C0D9C9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Логин -->
+        <TextBlock Text="Логин" FontWeight="Bold" VerticalAlignment="Center" Margin="10"/>
+        <TextBox x:Name="TextBoxLogin" Grid.Column="1" Margin="5" Height="25" VerticalAlignment="Center"/>
+
+        <!-- Пароль -->
+        <TextBlock Text="Пароль" FontWeight="Bold" Grid.Row="1" VerticalAlignment="Center" Margin="10"/>
+        <PasswordBox x:Name="PasswordBoxPassword" Grid.Column="1" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Center"/>
+
+        <!-- Кнопка Вход -->
+        <Button Grid.Column="1" Grid.Row="2" Content="Вход" Background="#F4A8A8"
+                Margin="5" Padding="5" FontWeight="Bold" Click="Button_Click"/>
+
+        <!-- Кнопка Регистрация -->
+        <Button Grid.Column="1" Grid.Row="3" Content="Регистрация" Background="#A8C4F4"
+                Margin="5" Padding="5" FontWeight="Bold" Click="ButtonRegister_OnClick"/>
+    </Grid>
+
 </Window>
